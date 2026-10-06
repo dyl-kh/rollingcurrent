@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { withBase } from "./paths";
 
 export type Job = {
   id: string;
@@ -212,7 +213,7 @@ function JobDialog({
           </p>
           <div className="mt-6 flex flex-wrap items-center gap-3">
             <a
-              href="/#contact"
+              href={withBase("/#contact")}
               className="px-5 py-2.5 rounded bg-[#e04a1a] text-white text-sm font-semibold hover:bg-[#c43c10] transition-colors"
               style={{ fontFamily: "Outfit, sans-serif" }}
             >
@@ -265,7 +266,7 @@ export function WorkPreview() {
             </h2>
           </div>
           <a
-            href="/gallery"
+            href={withBase("/gallery")}
             className="text-sm font-semibold text-[#e04a1a] hover:text-[#c43c10]"
             style={{ fontFamily: "Outfit, sans-serif" }}
           >
@@ -274,7 +275,7 @@ export function WorkPreview() {
         </div>
         <div className="grid sm:grid-cols-3 gap-4">
           {preview.map((job) => (
-            <a key={job.id} href={`/gallery#${job.id}`} className="group block">
+            <a key={job.id} href={withBase(`/gallery#${job.id}`)} className="group block">
               <div className="overflow-hidden rounded-lg border border-[#e0d8cc] bg-[#e8e0d4]">
                 <img
                   src={job.image}
@@ -388,7 +389,7 @@ export default function Gallery() {
             </p>
           </div>
           <a
-            href="/#contact"
+            href={withBase("/#contact")}
             className="shrink-0 px-5 py-2.5 rounded bg-[#e04a1a] text-white text-sm font-semibold text-center hover:bg-[#c43c10] transition-colors"
             style={{ fontFamily: "Outfit, sans-serif" }}
           >

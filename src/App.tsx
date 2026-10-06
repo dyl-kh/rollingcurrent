@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import logoImg from "@/imports/669342392_122182840292932458_1880932170201731250_n__1_.jpg";
 import victronLogo from "@/imports/victron-logo.svg";
 import Gallery, { WorkPreview } from "./Gallery";
+import { appPathname, withBase } from "./paths";
 
 const NAV_LINKS = [
   { label: "Services", href: "/#services" },
@@ -90,7 +91,7 @@ function Header({ scrolled, pathname }: { scrolled: boolean; pathname: string })
       }`}
     >
       <div className="max-w-5xl mx-auto px-6 flex items-center justify-between">
-        <a href="/" className="flex items-center gap-2.5">
+        <a href={withBase("/")} className="flex items-center gap-2.5">
           <img src={logoImg} alt="Rollingcurrent logo" className="w-9 h-9 object-contain" />
           <span
             className="text-lg font-bold tracking-tight text-[#1c2b3a]"
@@ -105,7 +106,7 @@ function Header({ scrolled, pathname }: { scrolled: boolean; pathname: string })
           {NAV_LINKS.map((l) => (
             <a
               key={l.label}
-              href={l.href}
+              href={withBase(l.href)}
               aria-current={l.href === pathname ? "page" : undefined}
               className={`text-sm font-medium transition-colors duration-200 ${
                 l.href === pathname
@@ -118,7 +119,7 @@ function Header({ scrolled, pathname }: { scrolled: boolean; pathname: string })
             </a>
           ))}
           <a
-            href="/#contact"
+            href={withBase("/#contact")}
             className="px-5 py-2 rounded bg-[#e04a1a] text-white text-sm font-semibold hover:bg-[#c43c10] transition-colors duration-200"
             style={{ fontFamily: "Outfit, sans-serif" }}
           >
@@ -154,7 +155,7 @@ function Header({ scrolled, pathname }: { scrolled: boolean; pathname: string })
           {NAV_LINKS.map((l) => (
             <a
               key={l.label}
-              href={l.href}
+              href={withBase(l.href)}
               aria-current={l.href === pathname ? "page" : undefined}
               onClick={() => setMenuOpen(false)}
               className={`text-base font-medium transition-colors py-1 ${
@@ -166,7 +167,7 @@ function Header({ scrolled, pathname }: { scrolled: boolean; pathname: string })
             </a>
           ))}
           <a
-            href="/#contact"
+            href={withBase("/#contact")}
             onClick={() => setMenuOpen(false)}
             className="mt-1 px-5 py-3 rounded bg-[#e04a1a] text-white text-sm font-semibold text-center hover:bg-[#c43c10] transition-colors"
             style={{ fontFamily: "Outfit, sans-serif" }}
@@ -639,7 +640,7 @@ function Footer() {
           {NAV_LINKS.map((l) => (
             <a
               key={l.label}
-              href={l.href}
+              href={withBase(l.href)}
               className="text-xs text-[#1c2b3a]/40 hover:text-[#e04a1a] transition-colors"
               style={{ fontFamily: "Source Sans 3, sans-serif" }}
             >
@@ -655,7 +656,7 @@ function Footer() {
 function FloatingCTA({ visible }: { visible: boolean }) {
   return (
     <a
-      href="/#contact"
+      href={withBase("/#contact")}
       className={`fixed bottom-6 right-6 z-40 flex items-center gap-2 px-5 py-3 rounded-full bg-[#e04a1a] text-white text-sm font-semibold shadow-lg hover:bg-[#c43c10] transition-all duration-300 ${
         visible ? "translate-y-0 opacity-100" : "translate-y-16 opacity-0 pointer-events-none"
       }`}
@@ -672,7 +673,7 @@ function FloatingCTA({ visible }: { visible: boolean }) {
 export default function App() {
   const [scrolled, setScrolled] = useState(false);
   const [pastHero, setPastHero] = useState(false);
-  const pathname = window.location.pathname.replace(/\/$/, "") || "/";
+  const pathname = appPathname();
   const isGallery = pathname === "/gallery";
 
   useEffect(() => {
